@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natáčky - tabulka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f1ed;
+            color: #333;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        #searchInput {
+            width: 80%;
+            max-width: 400px;
+            padding: 8px;
+            border: 2px solid #C19A6B;
+            border-radius: 8px;
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            border: 2px solid #C19A6B;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            word-wrap: break-word; /* Pro dlouhé texty */
+        }
+
+        th {
+            background-color: #C19A6B;
+            color: #fff;
+            text-align: center;
+        }
+
+        tr:nth-child(even) { background-color: #f9f6f2; }
+        tr:hover { background-color: #f1e7d0; cursor: pointer; }
+
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead {
+                display: none;
+            }
+
+            tr {
+                border: none;  /* Zrušení rušivého rámečku */
+                margin-bottom: 12px; /* Optimalizovaná mezera mezi kartami */
+                border-radius: 12px;
+                background-color: #fff;
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+            }
+
+            td {
+                display: flex;
+                flex-direction: column;
+                padding: 8px 10px;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+
+            td:empty {
+                display: none; /* Skryje prázdné buňky na mobilních zařízeních */
+            }
+
+            td:empty::before {
+                display: none; /* Skryje i nadpis (data-label) u prázdných buněk */
+            }
+
+            td:first-child {
+                background-color: #FAF0E6;
+                font-weight: bold;
+                color: #8B4513;
+                padding: 10px 12px;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+                font-size: 1rem; /* Optimalizovaná velikost textu */
+            }
+
+            td:last-child {
+                border-bottom: none;
+            }
+
+            td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #C19A6B;
+                margin-bottom: 4px;
+                font-size: 0.9rem;  /* Jemnější označení kategorií */
+            }
+
+            .search-container {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+
+            #searchInput {
+                width: 80%;
+                max-width: 400px;
+                padding: 8px;
+                border: 2px solid #C19A6B;
+                border-radius: 8px;
+                outline: none;
+                background-color: #fff;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Natáčky - Přehled</h1>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="🔍 Hledat... (např. podle značky)">
+    </div>
+
+    <div class="table-container">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+            <tr>
+                <th>Název</th>
+                <th>Tvar natáček</th>
+                <th>Typ natáček</th>
+                <th>Typ oblouku</th>
+                <th>Velikost natáček</th>
+                <th>Drží i bez lepidla?</th>
+                <th>Speciálně upravený povrch</th>
+                <th>Možnost tepelné sterilizace</th>
+                <th>Jak rychle se zabarví</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-classic---natacky-na-lash-lifting-8-paru/">
+                <td data-label="Název">ÉLAN CLASSIC – natáčky na lash lifting 8 párů</td>
+                <td data-label="Tvar natáček">kulaté;ploché</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku">výrazný;střední</td>
+                <td data-label="Velikost natáček">S;S1;M;M1;L;L1;XL;XL1</td>
+                <td data-label="Drží i bez lepidla?">ne</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-easy-curl---natacky-na-lash-lifting-6-paru/">
+                <td data-label="Název">ÉLAN EASY CURL – natáčky na lash lifting 6 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;S1;M;M1;L;L1</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-lower-lashes-natacky-na-spodni-rasy-3-pary/">
+                <td data-label="Název">ÉLAN LOWER LASHES natáčky na spodní řasy 3 páry</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">na spodní řasy</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-natacky-na-lash-lifting-5-paru--10-ks/">
+                <td data-label="Název">ÉLAN natáčky na Lash Lifting 5 párů (10 ks)</td>
+                <td data-label="Tvar natáček">kapkovité;ploché</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;M1;M2;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-rainbow---sada-natacek-na-lash-lifting-4-pary/">
+                <td data-label="Název">ÉLAN Rainbow – sada natáček na lash lifting 4 páry</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-total-lift---natacky-na-lash-lifting-5-paru/">
+                <td data-label="Název">ÉLAN TOTAL LIFT – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/elan-wow-lash---natacky-na-lash-lifting-6-paru/">
+                <td data-label="Název">ÉLAN WOW LASH – natáčky na lash lifting 6 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/inlei--forma--univerzalni-silikonove-natacky-4-pary--8-ks/">
+                <td data-label="Název">InLei FORMA univerzální silikonové natáčky 4 páry (8 ks)</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">symetrické anatomické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">univerzální / jedna velikost</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">pomalu</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-clover-natacky-na-lash-lifting/">
+                <td data-label="Název">Katya Vinog fialové natáčky na lash lifting</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">1,5;2;2,5;3;3,5;4;4,5;5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-kompletni-sada-fialovych-natacek-na-lash-lifting---8-paru/">
+                <td data-label="Název">Katya Vinog kompletní sada fialových natáček na lash lifting – 8 párů</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">1,5;2;2,5;3;3,5;4;4,5;5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-kompletni-sada-modrych-natacek-na-lash-lifting---8-paru/">
+                <td data-label="Název">Katya Vinog kompletní sada modrých natáček na lash lifting – 8 párů</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">1,5;2;2,5;3;3,5;4;4,5;5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-modre-natacky-na-lash-lifting/">
+                <td data-label="Název">Katya Vinog modré natáčky na lash lifting</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">1,5;2;2,5;3;3,5;4;4,5;5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-natacky-na-lifting-spodnich-ras-kocka/">
+                <td data-label="Název">Katya Vinog natáčky na lifting spodních řas – tvar kočky 1 pár</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">na spodní řasy</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-natacky-na-lifting-spodnich-ras/">
+                <td data-label="Název">Katya Vinog natáčky na lifting spodních řas – tvar vlnky 1 pár</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">na spodní řasy</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-oranzove-natacky-na-lash-lifting-pro-extra-kratke-rasy-1-par/">
+                <td data-label="Název">Katya Vinog oranžové natáčky na lash lifting pro extra krátké řasy 1 pár</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické anatomické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">Pro super krátké řasy</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/katya-vinog-sada-nejpouzivanejsich-velikosti-fialovych-natacek---4-pary/">
+                <td data-label="Název">Katya Vinog sada nejpoužívanějších velikostí fialových natáček – 4 páry</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">2;2,5;3;3,5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/lami-lashes-aqua-color-sada-natacek-na-lash-lifting--5-paru/">
+                <td data-label="Název">Lami Lashes Aqua Color – sada natáček na lash lifting (5 párů)</td>
+                <td data-label="Tvar natáček">hybridní</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;LL;XL;na spodní řasy;2;2,5;3;4;5</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/lami-lashes-m-curl---sada-natacek-na-lash-lifting--6-paru/">
+                <td data-label="Název">Lami Lashes M Curl makronky – sada natáček na lash lifting (6 párů)</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">SS;S;M;L;LL;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/lami-lashes-relift-natacky-na-lash-lifting-pro-korekci/">
+                <td data-label="Název">Lami Lashes Relift natáčky na opravy po lash liftingu 2 ks</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/lamitta-sada-natacek-na-lash-lifting-5-paru/">
+                <td data-label="Název">Lamitta sada natáček na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-colibri-curl-natacky-na-lash-lifting---5-paru/">
+                <td data-label="Název">Maxymova Colibri Curl natáčky na lash lifting – 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;LL;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-colibri-lift-natacky-na-lash-lifting---5-paru/">
+                <td data-label="Název">Maxymova Colibri Lift natáčky na lash lifting – 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S1;M1;L1;LL1;XL1</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-curl-sada-modrych-natacek-na-lash-lifting---4-pary/">
+                <td data-label="Název">Maxymova CURL sada modrých natáček na lash lifting – 4 páry</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-flexi-mochi-trpytive-natacky-na-lash-lifting---3-pary/">
+                <td data-label="Název">Maxymova Flexi Mochi třpytivé natáčky na lash lifting – 3 páry</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">1;2;3</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-lift-curl-sada-natacek-na-lash-lifting---8-paru/">
+                <td data-label="Název">Maxymova LIFT & CURL sada natáček na lash lifting – 8 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-lift-sada-fialovych-natacek-na-lash-lifting---4-pary/">
+                <td data-label="Název">Maxymova LIFT sada fialových natáček na lash lifting – 4 páry</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://example.com/maxymova-lift-curl">
+                <td data-label="Název">Maxymova Moon CURL + LIFT průhledné natáčky na lash lifting 8 párů + 1 pár kompenzátorů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S+;S;S1;M;M1;M+;L;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-shell-u-curl-ultra-lepive-natacky-na-lash-lifting---5-paru/">
+                <td data-label="Název">Maxymova SHELL U-CURL ultra lepivé natáčky na lash lifting – 5 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-teddy-u-curl-ultra-lepive-natacky-na-lash-lifting---5-paru/">
+                <td data-label="Název">Maxymova TEDDY U-CURL ultra lepivé natáčky na lash lifting – 5 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku">výrazný</td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/maxymova-natacky-unicorn-sada/">
+                <td data-label="Název">Maxymova Unicorn natáčky na lash lifting – 6 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;M1;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/mia-flex-lift-sada-natacek-na-lash-lifting-3-pary/">
+                <td data-label="Název">Mia Flex Lift natáčky na lash lifting 1 pár</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">asymetrické anatomické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;M1</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/mia-pro-lashes-silikonove-natacky-na-lash-lifting---cerne/">
+                <td data-label="Název">Mia Pro Lashes silikonové natáčky na lash lifting – černé</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/mia-pro-lashes-silikonove-natacky-na-lash-lifting-oranzove/">
+                <td data-label="Název">Mia Pro Lashes silikonové natáčky na lash lifting oranžové</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/mia-pro-lashes-silikonove-natacky-na-lash-lifting-perletove/">
+                <td data-label="Název">Mia Pro Lashes silikonové natáčky na lash lifting perleťové</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/mia-silikonove-natacky-na-lash-lifting/">
+                <td data-label="Název">Mia Pro Lashes silikonové natáčky na lash lifting růžové</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/natacky-rady-natural-curl-inlei/">
+                <td data-label="Název">Natáčky řady NATURAL CURL InLei® jednotlivá velikost 6 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku">výrazný</td>
+                <td data-label="Velikost natáček">S1;M1;L1;XL1;XXL1</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/natacky-rady-perfect-curl-inlei/">
+                <td data-label="Název">Natáčky řady PERFECT CURL InLei® jednotlivá velikost 6 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček">asymetrické anatomické</td>
+                <td data-label="Typ oblouku">výrazný</td>
+                <td data-label="Velikost natáček">S;M;L;XL;XXL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace">ano</td>
+                <td data-label="Jak rychle se zabarví">rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/perfect-line-natacky-na-lash-lifting-gold/">
+                <td data-label="Název">Perfect Line Gold natáčky na lash lifting – 4 páry</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ne</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/perfect-line-natacky-na-lash-lifting-dvoubarevne/">
+                <td data-label="Název">Perfect Line natáčky na lash lifting dvoubarevné – 4 páry</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ne</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/perfect-line-sada-natacek-na-lash-lifting/">
+                <td data-label="Název">Perfect Line sada natáček na lash lifting 4 páry</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček">symetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ne</td>
+                <td data-label="Možnost tepelné sterilizace">ne</td>
+                <td data-label="Jak rychle se zabarví">středně rychle</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/pretty-eyes-natacky-na-lash-lifting-4-pary/">
+                <td data-label="Název">Pretty Eyes natáčky na Lash Lifting 4 páry</td>
+                <td data-label="Tvar natáček">kulaté;ploché</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku">výrazný;střední</td>
+                <td data-label="Velikost natáček">S;S1;M;M1;L;L1;XL;XL1</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví">pomalu</td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/refectocil-natacky-na-rasy-velke-36-ks/">
+                <td data-label="Název">RefectoCil - Natáčky na řasy velké 36 ks (L)</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-candy-extreme-curl---natacky-na-lash-lifting/">
+                <td data-label="Název">ZOLA Candy Extreme Curl – natáčky na lash lifting 6 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;LL;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-cat-eye---natacky-na-lash-lifting/">
+                <td data-label="Název">ZOLA Cat Eye – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček">asymetrické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;M+;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-cloud---natacky-na-lash-lifting/">
+                <td data-label="Název">ZOLA Cloud – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">SS;S;M;L;LL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-color-splash--natacky-na-lash-lifting-5-paru/">
+                <td data-label="Název">ZOLA Color Splash – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček">kapkovité</td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-extra-curl---natacky-na-lash-lifting-7-paru/">
+                <td data-label="Název">ZOLA Extra Curl – natáčky na lash lifting 7 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček">asymetrické anatomické</td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;M1;L;XL</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch">ne</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-jelly-l-curl--natacky-na-horni-a-spodni-rasy-11-paru/">
+                <td data-label="Název">ZOLA Jelly L-Curl  – natáčky na horní a spodní řasy 11 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;LL;LL+;XL;XXL;na spodní řasy</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch">ano</td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-glamour-flex--natacky-na-lash-lifting-6-paru/">
+                <td data-label="Název">ZOLA Glamour Flex – natáčky na lash lifting 6 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S+;S;M;M+;L;L+</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-chic-curl--natacky-na-lash-lifting-5-paru/">
+                <td data-label="Název">ZOLA Chic Curl – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-multi-tone--natacky-na-lash-lifting-8-paru/">
+                <td data-label="Název">ZOLA Multi Tone – natáčky na lash lifting 8 párů</td>
+                <td data-label="Tvar natáček">kulaté</td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;XM;L;XL;XXL;3XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-pinky-shiny-pads---natacky-na-lash-lifting-5-paru/">
+                <td data-label="Název">ZOLA Pinky shiny pads – natáčky na lash lifting 5 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;XL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-prism-lash-l-curl---natacky-na-horni-a-spodni-rasy-11-paru/">
+                <td data-label="Název">ZOLA Prism Lash L-Curl – natáčky na horní a spodní řasy 11 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">XS;S;M;L;LL;LL+;XL;XXL</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-rainbow-l-curl---natacky-na-lash-lifting/">
+                <td data-label="Název">ZOLA Rainbow L-curl – natáčky na lash lifting 7 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;M;L;LL;XL;XLL;na spodní řasy</td>
+                <td data-label="Drží i bez lepidla?">ano</td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-round-curl-pink-green---natacky-na-lash-lifting-8-paru/">
+                <td data-label="Název">ZOLA Round curl pink & green – natáčky na lash lifting 8 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček">S;S1;M;M1;L;L1;XL;XL1</td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            <tr data-url="https://www.depilujeme.cz/natacky-na-lash-lifting/zola-shiny-candy---natacky-na-lash-lifting-6-paru/">
+                <td data-label="Název">ZOLA Shiny & Candy – natáčky na lash lifting 6 párů</td>
+                <td data-label="Tvar natáček"></td>
+                <td data-label="Typ natáček"></td>
+                <td data-label="Typ oblouku"></td>
+                <td data-label="Velikost natáček"></td>
+                <td data-label="Drží i bez lepidla?"></td>
+                <td data-label="Speciálně upravený povrch"></td>
+                <td data-label="Možnost tepelné sterilizace"></td>
+                <td data-label="Jak rychle se zabarví"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    // Filtrování tabulky
+    document.getElementById('searchInput').addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+
+        rows.forEach(row => {
+            const textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(searchValue) ? '' : 'none';
+        });
+    });
+
+    // Klikací řádky s odkazy
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
